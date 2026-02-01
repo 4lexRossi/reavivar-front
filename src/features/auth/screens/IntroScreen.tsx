@@ -21,10 +21,10 @@ export function IntroScreen({ navigation }: IntroScreenProps) {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
-          <Text variant="displaySmall" style={styles.title}>
+          <Text variant="displaySmall" style={[styles.title, { color: theme.colors.surface }]}>
             Reavivar
           </Text>
-          <Text variant="titleMedium" style={styles.subtitle}>
+          <Text variant="titleMedium" style={[styles.subtitle, { color: theme.colors.surface, opacity: 0.9 }]}>
             Um espaço para entender como você está se sentindo.
           </Text>
         </View>
@@ -35,8 +35,8 @@ export function IntroScreen({ navigation }: IntroScreenProps) {
             onPress={() => navigation.navigate('PreTest')}
             style={styles.button}
             contentStyle={styles.buttonContent}
-            buttonColor="rgba(255, 255, 255, 0.2)"
-            textColor="#fff"
+            buttonColor={theme.colors.surface + '33'}
+            textColor={theme.colors.surface}
           >
             Começar
           </Button>
@@ -63,16 +63,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   title: {
-    color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
     letterSpacing: 1,
   },
   subtitle: {
-    color: '#FFFFFF',
     textAlign: 'center',
-    opacity: 0.9,
     lineHeight: 24,
   },
   footer: {

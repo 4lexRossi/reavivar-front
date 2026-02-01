@@ -18,9 +18,11 @@ interface MoodOption {
 }
 
 const moodOptions: MoodOption[] = [
+  { emoji: "😄", label: "Excelente", value: "excelent" },
   { emoji: "🙂", label: "Bem", value: "good" },
   { emoji: "😐", label: "Ok", value: "ok" },
   { emoji: "😕", label: "Não muito bem", value: "so-so" },
+  { emoji: "😦", label: "Ruim", value: "bad" },
 ];
 
 export function WelcomeScreen({ navigation }: WelcomeScreenProps) {
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   moodButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 24,
     borderRadius: 16,
     borderWidth: 2,

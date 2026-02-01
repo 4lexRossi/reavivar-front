@@ -15,35 +15,35 @@ export function PreTestScreen({ navigation }: PreTestScreenProps) {
   const theme = useTheme();
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#F9F7FF' }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.surfaceVariant }]}>
       <View style={styles.header}>
         <IconButton
           icon="chevron-left"
           size={30}
           onPress={() => navigation.goBack()}
-          iconColor="#6B4EFF"
+          iconColor={theme.colors.primary}
         />
         <View style={styles.cloudContainer}>
-           <IconButton icon="cloud" iconColor="rgba(107, 78, 255, 0.1)" size={40} />
+           <IconButton icon="cloud" iconColor={theme.colors.primary} style={{ opacity: 0.1 }} size={40} />
         </View>
       </View>
 
       <View style={styles.content}>
-        <Text variant="headlineSmall" style={styles.title}>
+        <Text variant="headlineSmall" style={[styles.title, { color: theme.colors.onSurface }]}>
           Antes de começar
         </Text>
 
-        <Text variant="titleMedium" style={styles.subtitle}>
+        <Text variant="titleMedium" style={[styles.subtitle, { color: theme.colors.onSurface }]}>
           Queremos te conhecer um pouco melhor.
         </Text>
 
-        <Text variant="bodyLarge" style={styles.body}>
+        <Text variant="bodyLarge" style={[styles.body, { color: theme.colors.primary }]}>
           São apenas 5 perguntas rápidas para personalizar sua experiência no Reavivar.
         </Text>
 
-        <View style={styles.infoBox}>
-          <IconButton icon="clock-outline" size={20} iconColor="#6B4EFF" />
-          <Text style={styles.infoText}>Leva menos de 1 minuto</Text>
+        <View style={[styles.infoBox, { backgroundColor: theme.colors.primary + '0D' }]}>
+          <IconButton icon="clock-outline" size={20} iconColor={theme.colors.primary} />
+          <Text style={[styles.infoText, { color: theme.colors.primary }]}>Leva menos de 1 minuto</Text>
         </View>
       </View>
 
@@ -53,7 +53,7 @@ export function PreTestScreen({ navigation }: PreTestScreenProps) {
           onPress={() => navigation.navigate('Welcome')}
           style={styles.button}
           contentStyle={styles.buttonContent}
-          buttonColor="#9B8BFF"
+          buttonColor={theme.colors.primary}
         >
           Iniciar teste
         </Button>
@@ -83,18 +83,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: '#2D1F66',
     fontWeight: 'bold',
     marginBottom: 24,
   },
   subtitle: {
-    color: '#2D1F66',
     textAlign: 'center',
     marginBottom: 16,
     fontWeight: '600',
   },
   body: {
-    color: '#6B4EFF',
     textAlign: 'center',
     opacity: 0.8,
     lineHeight: 24,
@@ -103,13 +100,11 @@ const styles = StyleSheet.create({
   infoBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(107, 78, 255, 0.05)',
     borderRadius: 20,
     paddingRight: 20,
     paddingLeft: 4,
   },
   infoText: {
-    color: '#6B4EFF',
     fontWeight: '500',
   },
   footer: {
