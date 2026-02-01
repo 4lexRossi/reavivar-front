@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { TextInput as PaperTextInput, Button, Text, useTheme } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { TextInput as PaperTextInput, Button, Text, Card, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TextInput: any = PaperTextInput;
@@ -15,37 +14,52 @@ export function SignInScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.content}>
-        <Text variant="displaySmall" style={[styles.title, { color: theme.colors.primary }]}>
-          Welcome Back
+        <Text variant="headlineSmall" style={[styles.title, { color: theme.colors.onSurface }]}>
+          Bem-vindo de volta 🌱
         </Text>
-        <Text variant="bodyLarge" style={styles.subtitle}>
-          Sign in to continue your journey
+        <Text variant="bodyLarge" style={[styles.subtitle, { color: theme.colors.onSurface }]}>
+          Entre para continuar sua jornada
         </Text>
 
-        <TextInput
-          mode="outlined"
-          label="Email"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-
-        <TextInput
-          mode="outlined"
-          label="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={secureTextEntry}
-          right={
-            <TextInput.Icon
-              icon={secureTextEntry ? "eye" : "eye-off"}
-              onPress={() => setSecureTextEntry(!secureTextEntry)}
+        <Card mode="elevated" style={[styles.card, { backgroundColor: theme.colors.surfaceVariant }]}>
+          <Card.Content style={styles.cardContent}>
+            <TextInput
+              mode="outlined"
+              label="E-mail"
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              outlineStyle={styles.inputOutline}
             />
-          }
-          style={styles.input}
-        />
+
+            <TextInput
+              mode="outlined"
+              label="Senha"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={secureTextEntry}
+              right={
+                <TextInput.Icon
+                  icon={secureTextEntry ? "eye" : "eye-off"}
+                  onPress={() => setSecureTextEntry(!secureTextEntry)}
+                />
+              }
+              style={styles.input}
+              outlineStyle={styles.inputOutline}
+            />
+
+            <Button
+              mode="text"
+              onPress={() => console.log('Forgot password pressed')}
+              style={styles.forgotButton}
+              compact
+            >
+              Esqueceu a senha?
+            </Button>
+          </Card.Content>
+        </Card>
 
         <Button
           mode="contained"
@@ -53,15 +67,15 @@ export function SignInScreen() {
           style={styles.button}
           contentStyle={styles.buttonContent}
         >
-          Sign In
+          Entrar
         </Button>
 
         <Button
           mode="text"
-          onPress={() => console.log('Forgot password pressed')}
-          style={styles.textButton}
+          textColor={theme.colors.primary}
+          onPress={() => console.log('SignUp pressed')}
         >
-          Forgot Password?
+          Não tem conta? Cadastre-se
         </Button>
       </View>
     </SafeAreaView>
@@ -75,27 +89,38 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 24,
+    gap: 16,
     justifyContent: 'center',
   },
   title: {
-    marginBottom: 8,
     textAlign: 'center',
+    marginBottom: 4,
   },
   subtitle: {
-    marginBottom: 32,
     textAlign: 'center',
     opacity: 0.7,
+    marginBottom: 8,
+  },
+  card: {
+    borderRadius: 20,
+  },
+  cardContent: {
+    gap: 8,
   },
   input: {
-    marginBottom: 16,
+    backgroundColor: 'transparent',
+  },
+  inputOutline: {
+    borderRadius: 12,
+  },
+  forgotButton: {
+    alignSelf: 'flex-end',
+    marginTop: 4,
   },
   button: {
-    marginTop: 8,
+    borderRadius: 16,
   },
   buttonContent: {
-    paddingVertical: 6,
+    height: 52,
   },
-  textButton: {
-    marginTop: 16,
-  }
 });

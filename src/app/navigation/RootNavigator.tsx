@@ -1,9 +1,15 @@
-
 import React from "react";
-import { SignInScreen } from "@/features/auth/screens/SignInScreen";
+import { enableScreens } from "react-native-screens";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthNavigator } from "./AuthNavigator";
+
+// Enable native screens for better performance on Android/iOS
+enableScreens();
 
 export function RootNavigator() {
   return (
-    <SignInScreen />
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
   );
 }
