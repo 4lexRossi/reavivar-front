@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, ImageBackground } from "react-native";
 import { Text, Button, useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -30,76 +30,86 @@ export function WelcomeScreen({ navigation }: WelcomeScreenProps) {
   const [selectedMood, setSelectedMood] = React.useState<string | null>(null);
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <View style={styles.content}>
-        <Text variant="headlineMedium" style={[styles.title, { color: theme.colors.onSurface }]}>
-          Reavivar 🌱
-        </Text>
+    <ImageBackground
+      source={require('../../../assets/lavender_bg3.png')}
+      style={styles.background}
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.content}>
+          <Text variant="headlineMedium" style={[styles.title, { color: theme.colors.onSurface }]}>
+            Reavivar 🌱
+          </Text>
 
-        <Text variant="titleMedium" style={[styles.question, { color: theme.colors.onSurface }]}>
-          Como você está hoje?
-        </Text>
+          <Text variant="titleMedium" style={[styles.question, { color: theme.colors.onSurface }]}>
+            Como você está hoje?
+          </Text>
 
-        <View style={styles.moodList}>
-          {moodOptions.map((mood) => {
-            const isSelected = selectedMood === mood.value;
-            return (
-              <Pressable
-                key={mood.value}
-                onPress={() => setSelectedMood(mood.value)}
-                style={[
-                  styles.moodButton,
-                  {
-                    backgroundColor: isSelected
-                      ? theme.colors.primaryContainer
-                      : theme.colors.surfaceVariant,
-                    borderColor: isSelected
-                      ? theme.colors.primary
-                      : theme.colors.surfaceVariant,
-                  },
-                ]}
-              >
-                <Text style={styles.moodEmoji}>{mood.emoji}</Text>
-                <Text
-                  variant="titleMedium"
+          <View style={styles.moodList}>
+            {moodOptions.map((mood) => {
+              const isSelected = selectedMood === mood.value;
+              return (
+                <Pressable
+                  key={mood.value}
+                  onPress={() => setSelectedMood(mood.value)}
                   style={[
-                    styles.moodLabel,
+                    styles.moodButton,
                     {
-                      color: isSelected
-                        ? theme.colors.onPrimaryContainer
-                        : theme.colors.onSurfaceVariant
-                    }
+                      backgroundColor: isSelected
+                        ? theme.colors.primaryContainer
+                        : 'rgba(255, 255, 255, 0.6)',
+                      borderColor: isSelected
+                        ? theme.colors.primary
+                        : 'rgba(255, 255, 255, 0.3)',
+                    },
                   ]}
                 >
-                  {mood.label}
-                </Text>
-              </Pressable>
-            );
-          })}
+                  <Text style={styles.moodEmoji}>{mood.emoji}</Text>
+                  <Text
+                    variant="titleMedium"
+                    style={[
+                      styles.moodLabel,
+                      {
+                        color: isSelected
+                          ? theme.colors.onPrimaryContainer
+                          : theme.colors.onSurfaceVariant
+                      }
+                    ]}
+                  >
+                    {mood.label}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          <Button
+            mode="contained"
+            contentStyle={styles.continueButtonContent}
+            style={styles.continueButton}
+            onPress={() => console.log('Continue pressed')}
+          >
+            Continuar
+          </Button>
+
+          <Button
+            mode="text"
+            textColor={theme.colors.primary}
+            onPress={() => navigation.navigate("SignIn")}
+          >
+            Conhecer plano completo
+          </Button>
         </View>
-
-        <Button
-          mode="contained"
-          contentStyle={styles.continueButtonContent}
-          style={styles.continueButton}
-          onPress={() => console.log('Continue pressed')}
-        >
-          Continuar
-        </Button>
-
-        <Button
-          mode="text"
-          textColor={theme.colors.primary}
-          onPress={() => navigation.navigate("SignIn")}
-        >
-          Conhecer plano completo
-        </Button>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
   },
