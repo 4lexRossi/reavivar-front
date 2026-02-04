@@ -31,7 +31,7 @@ export function WelcomeScreen({ navigation }: WelcomeScreenProps) {
 
   return (
     <ImageBackground
-      source={require('../../../assets/lavender_bg3.png')}
+      source={require('../../../assets/final_bg.png')}
       style={styles.background}
     >
       <SafeAreaView style={styles.container}>

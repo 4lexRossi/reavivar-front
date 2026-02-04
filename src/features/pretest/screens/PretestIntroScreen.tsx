@@ -16,7 +16,7 @@ export function PretestIntroScreen({ navigation }: PretestIntroScreenProps) {
 
   return (
     <ImageBackground
-      source={require('../../../assets/lavender_bg.png')}
+      source={require('../../../assets/final_bg.png')}
       style={styles.background}
     >
       <SafeAreaView style={styles.container}>
