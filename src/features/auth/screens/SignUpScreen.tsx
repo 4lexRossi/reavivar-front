@@ -158,7 +158,7 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
                 Comece sua jornada de autoconhecimento
               </Text>
 
-              <Card mode="elevated" style={[styles.card, { backgroundColor: 'rgba(255, 255, 255, 0.8)' }]}>
+              <Card mode="contained" style={[styles.card, { backgroundColor: 'rgba(255, 255, 255, 0.8)' }]}>
                 <Card.Content style={styles.cardContent}>
                   <View>
                     <TextInput
@@ -309,7 +309,6 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 24,
-    elevation: 2,
   },
   cardContent: {
     gap: 4,
