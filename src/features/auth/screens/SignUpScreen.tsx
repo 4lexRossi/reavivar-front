@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView as RNScrollView, KeyboardAvoidingView as RNKeyboardAvoidingView, Platform, ImageBackground } from 'react-native';
-import { TextInput as PaperTextInput, Button, Text, Card, useTheme, IconButton, HelperText } from 'react-native-paper';
+import { TextInput as PaperTextInput, Button, Text, Card, useTheme, IconButton, HelperText, Portal, Dialog } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { AuthStackParamList } from '@/app/navigation/types';
@@ -39,6 +39,7 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
   // UI states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPasswordInfo, setShowPasswordInfo] = useState(false);
   const [errors, setErrors] = useState<ValidationErrors>({});
 
   // Masking Birthdate: DD/MM/AAAA
@@ -216,9 +217,18 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
                   </View>
 
                   <View>
+                    <View style={styles.passwordHeader}>
+                      <Text style={[styles.inputLabel, { color: theme.colors.onSurfaceVariant }]}>Senha*</Text>
+                      <IconButton
+                        icon="information-outline"
+                        size={20}
+                        onPress={() => setShowPasswordInfo(true)}
+                        style={styles.infoIcon}
+                      />
+                    </View>
                     <TextInput
                       mode="outlined"
-                      label="Senha*"
+                      label="Digite sua senha"
                       value={password}
                       onChangeText={(t: string) => { setPassword(t); if (errors.password) setErrors({ ...errors, password: undefined }); }}
                       error={!!errors.password}
@@ -268,6 +278,20 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
+
+        <Portal>
+          <Dialog visible={showPasswordInfo} onDismiss={() => setShowPasswordInfo(false)} style={styles.dialog}>
+            <Dialog.Title>Requisitos da Senha</Dialog.Title>
+            <Dialog.Content>
+              <Text variant="bodyMedium">• Pelo menos 8 caracteres</Text>
+              <Text variant="bodyMedium">• Pelo menos uma letra maiúscula</Text>
+              <Text variant="bodyMedium">• Pelo menos um número</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={() => setShowPasswordInfo(false)}>Entendi</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -319,6 +343,22 @@ const styles = StyleSheet.create({
   },
   inputOutline: {
     borderRadius: 16,
+  },
+  passwordHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: -8,
+  },
+  inputLabel: {
+    fontSize: 14,
+    marginLeft: 4,
+  },
+  infoIcon: {
+    margin: 0,
+  },
+  dialog: {
+    borderRadius: 20,
   },
   footer: {
     marginTop: 16,
