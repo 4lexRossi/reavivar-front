@@ -33,7 +33,7 @@ export function SignInScreen({ navigation }: SignInScreenProps) {
             Entre para continuar sua jornada
           </Text>
 
-          <Card mode="elevated" style={[styles.card, { backgroundColor: 'rgba(255, 255, 255, 0.8)' }]}>
+          <Card mode="contained" style={[styles.card, { backgroundColor: 'rgba(255, 255, 255, 0.8)' }]}>
             <Card.Content style={styles.cardContent}>
               <TextInput
                 mode="outlined"
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 20,
-    elevation: 2,
   },
   cardContent: {
     gap: 8,
