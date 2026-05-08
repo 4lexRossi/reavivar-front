@@ -4,6 +4,8 @@ import { TextInput as PaperTextInput, Button, Text, Card, useTheme, IconButton, 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { AuthStackParamList } from '@/app/navigation/types';
+import { useAuth } from '@/store/AuthContext';
+import { Alert } from 'react-native';
 
 // Bypass TS issues with some React Native / Paper components
 const TextInput: any = PaperTextInput;
@@ -27,6 +29,8 @@ interface ValidationErrors {
 
 export function SignUpScreen({ navigation }: SignUpScreenProps) {
   const theme = useTheme();
+  const { signUp } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   // Field states
   const [fullName, setFullName] = useState('');
@@ -124,10 +128,23 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (validate()) {
-      console.log('Sign up validated', { fullName, birthdate, email, phoneNumber, password });
-      // Proceed with registration
+      setLoading(true);
+      try {
+        await signUp({
+          email,
+          password,
+          name: fullName,
+          birthdate,
+          phoneNumber: phoneNumber || undefined,
+        });
+        // Navigation is usually handled by the RootNavigator based on auth state
+      } catch (error: any) {
+        Alert.alert('Erro no Cadastro', error.response?.data?.message || 'Não foi possível criar sua conta agora.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -261,6 +278,8 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
                 <Button
                   mode="contained"
                   onPress={handleSignUp}
+                  loading={loading}
+                  disabled={loading}
                   style={styles.button}
                   contentStyle={styles.buttonContent}
                 >
