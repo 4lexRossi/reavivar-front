@@ -30,6 +30,9 @@
         "projectId": "66ed52d9-eaaf-40be-8960-f72f5965772f"
       }
     },
-    "owner": "4lexrossi"
+    "owner": "4lexrossi",
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
