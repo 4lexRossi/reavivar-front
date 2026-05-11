@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, Pressable, ScrollView } from 'react-native';
+import { View, StyleSheet, ImageBackground, Pressable, ScrollView, BackHandler } from 'react-native';
 import { Text, Button, IconButton, useTheme, ProgressBar } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { AuthStackParamList } from '@/app/navigation/types';
 import { PRETEST_QUESTIONS } from '../pretest.data';
@@ -35,13 +36,26 @@ export function PretestQuestionsScreen({ navigation }: PretestQuestionsScreenPro
 
 
 
-  const handleBack = () => {
+  const handleBack = React.useCallback(() => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     } else {
       navigation.goBack();
     }
-  };
+  }, [currentQuestionIndex, navigation]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        handleBack();
+        return true;
+      };
+
+      const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () => subscription.remove();
+    }, [handleBack])
+  );
 
   const selectedValue = answers[currentQuestion.id];
 
