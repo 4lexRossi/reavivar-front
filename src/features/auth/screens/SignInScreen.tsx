@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground, Alert } from 'react-native';
 import { TextInput as PaperTextInput, Button, Text, Card, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { AuthStackParamList } from '@/app/navigation/types';
+import { useAuth } from '@/store/AuthContext';
 
 const TextInput: any = PaperTextInput;
 
@@ -15,9 +16,27 @@ interface SignInScreenProps {
 
 export function SignInScreen({ navigation }: SignInScreenProps) {
   const theme = useTheme();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  const handleSignIn = async () => {
+    if (!email || !password) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await signIn({ email, password });
+    } catch (error: any) {
+      Alert.alert('Erro no Login', error.response?.data?.message || 'Ocorreu um erro inesperado.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <ImageBackground
@@ -75,7 +94,9 @@ export function SignInScreen({ navigation }: SignInScreenProps) {
 
           <Button
             mode="contained"
-            onPress={() => console.log('Login pressed')}
+            onPress={handleSignIn}
+            loading={loading}
+            disabled={loading}
             style={styles.button}
             contentStyle={styles.buttonContent}
           >
