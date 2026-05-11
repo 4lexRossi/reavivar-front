@@ -3,9 +3,9 @@ import { View, StyleSheet, Pressable, ImageBackground } from "react-native";
 import { Text, Button, useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { AuthStackParamList } from "@/app/navigation/types";
+import type { MainStackParamList } from "@/app/navigation/MainNavigator";
 
-type WelcomeScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, "Welcome">;
+type WelcomeScreenNavigationProp = NativeStackNavigationProp<MainStackParamList, "Welcome">;
 
 interface WelcomeScreenProps {
   navigation: WelcomeScreenNavigationProp;
@@ -86,18 +86,13 @@ export function WelcomeScreen({ navigation }: WelcomeScreenProps) {
             mode="contained"
             contentStyle={styles.continueButtonContent}
             style={styles.continueButton}
-            onPress={() => console.log('Continue pressed')}
+            disabled={!selectedMood}
+            onPress={() => navigation.navigate("Tabs")}
           >
             Continuar
           </Button>
 
-          <Button
-            mode="text"
-            textColor={theme.colors.primary}
-            onPress={() => navigation.navigate("SignIn")}
-          >
-            Conhecer plano completo
-          </Button>
+
         </View>
       </SafeAreaView>
     </ImageBackground>

@@ -54,7 +54,7 @@ export function PretestIntroScreen({ navigation }: PretestIntroScreenProps) {
         <View style={styles.footer}>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('Welcome')}
+            onPress={() => navigation.navigate('SignIn')}
             style={styles.button}
             contentStyle={styles.buttonContent}
             buttonColor={theme.colors.primary}
