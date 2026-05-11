@@ -159,15 +159,6 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
           style={styles.keyboardView}
         >
           <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-            <View style={styles.header}>
-              <IconButton
-                icon="chevron-left"
-                size={30}
-                onPress={() => navigation.goBack()}
-                iconColor={theme.colors.primary}
-              />
-            </View>
-
             <View style={styles.content}>
               <Text variant="headlineSmall" style={[styles.title, { color: theme.colors.onSurface }]}>
                 Crie sua conta ✨
@@ -324,12 +315,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
   keyboardView: {
     flex: 1,
   },
   scrollContent: {
     flexGrow: 1,
+    paddingVertical: 15
   },
   header: {
     paddingHorizontal: 8,
