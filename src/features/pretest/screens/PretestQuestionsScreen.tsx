@@ -72,15 +72,25 @@ export function PretestQuestionsScreen({ navigation }: PretestQuestionsScreenPro
             onPress={handleBack}
             iconColor={theme.colors.primary}
           />
-          <View style={styles.progressContainer}>
-            <ProgressBar
-              progress={progress}
-              color={theme.colors.primary}
-              style={styles.progressBar}
-            />
-            <Text variant="labelMedium" style={[styles.progressText, { color: theme.colors.primary }]}>
-              {currentQuestionIndex + 1} de {PRETEST_QUESTIONS.length}
-            </Text>
+          <View style={styles.segmentedProgressContainer}>
+            {PRETEST_QUESTIONS.map((_, index) => {
+              const isCompleted = index < currentQuestionIndex;
+              const isCurrent = index === currentQuestionIndex;
+              return (
+                <View 
+                  key={index} 
+                  style={[
+                    styles.progressSegment,
+                    { 
+                      backgroundColor: isCompleted || isCurrent 
+                        ? theme.colors.primary 
+                        : 'rgba(255, 255, 255, 0.3)',
+                      opacity: isCurrent ? 1 : isCompleted ? 0.8 : 0.5
+                    }
+                  ]} 
+                />
+              );
+            })}
           </View>
         </View>
 
@@ -160,20 +170,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 8,
   },
-  progressContainer: {
-    flex: 1,
-    marginRight: 48,
-    alignItems: 'center',
-  },
-  progressBar: {
-    width: '100%',
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-  },
   progressText: {
     marginTop: 4,
     fontWeight: 'bold',
+  },
+  segmentedProgressContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 4,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginRight: 48, // Balance the back button
+  },
+  progressSegment: {
+    flex: 1,
+    height: 4,
+    borderRadius: 2,
   },
   scrollContent: {
     padding: 20,
