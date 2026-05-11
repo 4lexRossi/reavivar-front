@@ -34,27 +34,27 @@ export function PretestIntroScreen({ navigation }: PretestIntroScreenProps) {
 
         <View style={styles.content}>
           <Text variant="headlineSmall" style={[styles.title, { color: theme.colors.onSurface }]}>
-            Antes de começar
+            Antes de começar...
           </Text>
 
           <Text variant="titleMedium" style={[styles.subtitle, { color: theme.colors.onSurface }]}>
-            Queremos te conhecer um pouco melhor.
+            Responda algumas perguntas para que possamos personalizar sua experiência no Reavivar.
           </Text>
 
           <Text variant="bodyLarge" style={[styles.body, { color: theme.colors.primary }]}>
-            São apenas 5 perguntas rápidas para personalizar sua experiência no Reavivar.
+            São apenas 10 perguntas rápidas.
           </Text>
 
           <View style={[styles.infoBox, { backgroundColor: 'rgba(255, 255, 255, 0.6)' }]}>
             <IconButton icon="clock-outline" size={20} iconColor={theme.colors.primary} />
-            <Text style={[styles.infoText, { color: theme.colors.primary }]}>Leva menos de 1 minuto</Text>
+            <Text style={[styles.infoText, { color: theme.colors.primary }]}>Leva apenas alguns minutos</Text>
           </View>
         </View>
 
         <View style={styles.footer}>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('SignIn')}
+            onPress={() => navigation.navigate('PreTestQuestions')}
             style={styles.button}
             contentStyle={styles.buttonContent}
             buttonColor={theme.colors.primary}
