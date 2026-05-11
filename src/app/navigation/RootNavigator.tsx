@@ -2,7 +2,7 @@ import React from "react";
 import { enableScreens } from "react-native-screens";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthNavigator } from "@/app/navigation/AuthNavigator";
-import { MainTabs } from "@/app/navigation/MainTabs";
+import { MainNavigator } from "@/app/navigation/MainNavigator";
 import { useAuth } from "@/store/AuthContext";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
@@ -23,7 +23,7 @@ export function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {user ? <MainTabs /> : <AuthNavigator />}
+      {user ? <MainNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 }
