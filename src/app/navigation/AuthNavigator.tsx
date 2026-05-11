@@ -6,6 +6,7 @@ import { PretestQuestionsScreen } from "@/features/pretest/screens/PretestQuesti
 
 import { SignInScreen } from "@/features/auth/screens/SignInScreen";
 import { SignUpScreen } from "@/features/auth/screens/SignUpScreen";
+import { ForgotPasswordScreen } from "@/features/auth/screens/ForgotPasswordScreen";
 import type { AuthStackParamList } from "./types";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -24,6 +25,7 @@ export function AuthNavigator() {
 
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
     </Stack.Navigator>
   );
 }

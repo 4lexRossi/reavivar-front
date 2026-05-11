@@ -4,4 +4,5 @@ export type AuthStackParamList = {
   PreTestQuestions: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  ForgotPassword: undefined;
 };
