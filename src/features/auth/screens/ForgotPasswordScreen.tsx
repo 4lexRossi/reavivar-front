@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, Alert } from 'react-native';
+import { View, StyleSheet, ImageBackground, Alert, Keyboard } from 'react-native';
 import { TextInput as PaperTextInput, Button, Text, Card, useTheme, IconButton, Portal, Dialog } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -23,6 +23,7 @@ export function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) 
   const [dialogMessage, setDialogMessage] = useState('');
 
   const handleResetPassword = async () => {
+    Keyboard.dismiss();
     if (!email) {
       Alert.alert('Erro', 'Por favor, insira seu e-mail.');
       return;
