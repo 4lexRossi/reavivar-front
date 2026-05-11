@@ -32,5 +32,10 @@ export const authService = {
   async getUserData() {
     const data = await SecureStore.getItemAsync('userData');
     return data ? JSON.parse(data) : null;
+  },
+
+  async forgotPassword(email: string): Promise<{ message: string }> {
+    const response = await apiClient.post('/auth/forgot-password', { email });
+    return response.data;
   }
 };

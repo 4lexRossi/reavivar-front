@@ -83,7 +83,7 @@ export function SignInScreen({ navigation }: SignInScreenProps) {
 
               <Button
                 mode="text"
-                onPress={() => console.log('Forgot password pressed')}
+                onPress={() => navigation.navigate('ForgotPassword')}
                 style={styles.forgotButton}
                 compact
               >

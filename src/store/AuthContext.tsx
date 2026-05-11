@@ -8,6 +8,7 @@ interface AuthContextData {
   signIn(data: SigninData): Promise<void>;
   signUp(data: SignupData): Promise<void>;
   signOut(): void;
+  forgotPassword(email: string): Promise<{ message: string }>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -44,8 +45,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   }
 
+  async function forgotPassword(email: string) {
+    return authService.forgotPassword(email);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, forgotPassword }}>
       {children}
     </AuthContext.Provider>
   );
